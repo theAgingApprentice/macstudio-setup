@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+SRC="${REPO_ROOT}/motd/motd"
+DEST="/etc/motd"
+
+if [[ ! -f "${SRC}" ]]; then
+    echo "ERROR: Source file not found: ${SRC}" >&2
+    exit 1
+fi
+
+sudo cp "${SRC}" "${DEST}"
+echo "MOTD copied to ${DEST}"

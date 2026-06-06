@@ -1,0 +1,19 @@
+================================================================================
+  Andrews-Mac-Studio
+  Welcome back, Andrew.
+================================================================================
+
+MitchellNET Services (https via mitchellnet.local)
+  http://mitchellnet.local/          Home dashboard
+  http://mitchellnet.local/grafana   Grafana metrics
+  http://mitchellnet.local/portainer Portainer container management
+  http://mitchellnet.local/nodered   Node-RED automation
+  http://mitchellnet.local/mqtt      Mosquitto MQTT broker (192.168.2.10:1883)
+
+Repos
+  ~/Documents/visualStudioCode/      All MitchellNET service repos live here
+
+Runbook
+  mitchellnet-infra/docs/runbook.md  Full infrastructure runbook
+
+================================================================================

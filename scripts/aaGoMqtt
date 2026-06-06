@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+BROKER="192.168.2.10"
+PORT="1883"
+
+usage() {
+    cat <<EOF
+Usage:
+  $(basename "$0") sub <topic>              Subscribe and print all messages
+  $(basename "$0") pub <topic> <message>    Publish a message to a topic
+
+Examples:
+  $(basename "$0") sub mitchellnet/#
+  $(basename "$0") pub mitchellnet/test "hello world"
+
+Broker: ${BROKER}:${PORT}
+EOF
+    exit 1
+}
+
+if [[ $# -lt 2 ]]; then
+    usage
+fi
+
+MODE="${1}"
+TOPIC="${2}"
+
+case "${MODE}" in
+    sub)
+        echo "Subscribing to topic '${TOPIC}' on ${BROKER}:${PORT} ..."
+        mosquitto_sub -h "${BROKER}" -p "${PORT}" -t "${TOPIC}" -v
+        ;;
+    pub)
+        if [[ $# -lt 3 ]]; then
+            echo "ERROR: pub mode requires a message payload as the third argument." >&2
+            usage
+        fi
+        PAYLOAD="${3}"
+        mosquitto_pub -h "${BROKER}" -p "${PORT}" -t "${TOPIC}" -m "${PAYLOAD}"
+        echo "Published to '${TOPIC}': ${PAYLOAD}"
+        ;;
+    *)
+        echo "ERROR: Unknown mode '${MODE}'. Use 'pub' or 'sub'." >&2
+        usage
+        ;;
+esac

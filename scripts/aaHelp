@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+cat <<'HEADER'
+================================================================================
+  MitchellNET Mac Studio — Custom Scripts
+================================================================================
+
+HEADER
+
+cat <<'SCRIPTS'
+  aaCopyMotd      Copy motd/motd from this repo to /etc/motd
+  aaCopyScripts   Install all scripts in scripts/ to /usr/local/bin
+  aaGoMqtt        Publish or subscribe to MQTT topics on the MitchellNET broker
+  aaHelp          Show this help summary and the current MOTD
+  install.sh      Bootstrap a fresh Mac Studio dev environment end-to-end
+
+SCRIPTS
+
+echo "================================================================================"
+echo "  /etc/motd"
+echo "================================================================================"
+echo ""
+
+if [[ -f /etc/motd ]]; then
+    cat /etc/motd
+else
+    echo "(no /etc/motd found — run aaCopyMotd to install it)"
+fi
+
+echo ""
